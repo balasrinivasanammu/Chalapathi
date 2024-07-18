@@ -1,0 +1,82 @@
+HTML,css,Javascript,Jquery,Bootstrap ---- UI developer
+
+HTML,css,Javascript,Jquery,Bootstrap, Photoshop, or corldraw or Animation related like figma - UX designer
+
+HTML,css,Javascript,Jquery,Bootstrap, 
+(Any one server side languges like - JAVA, PHP, PYTHON, C++,NOdejs)
+(Any one Databases like MySQL, Oracle, Mssql, MOngoDB, couchDB) - 
+Fullstack developer
+
+MongoDB, ExpressJs,ReactJS, NOdejS - MERN stack developer
+
+MongoDB, ExpressJs,AngularJS, NOdejS - MEAN stack developer
+
+U can learn atleast min 2 databases - MySQL or Oracle or MongoDB,etc - DBA
+
+Testing - Selenium-cucumber etc
+
+
+---------------------------------------
+
+client side languages or Front end - HTML,XML,CSS,BS,JS,JQ,AJS,RJS,VueJS
+
+Sever side languages or Back end - JAVA,PHP,NODEJS,PYTHON, .NET
+
+Databases - 2 types of DB
+
+SQL - MySQL, Oracle,MsSQL,PLSQL,Postgresql.,etc
+NOSQL - MongoDB, CouchDB
+
+-----------------------------------------
+
+Requirements: Run the MERN stack
+
+Hardware: 4GB or 8GB  to -----
+          256GB HDD,SDD to -----
+          No graphics card
+ 
+Software : Windows10 or more
+           64bit architecture OS
+      IDE: Integrated Development Environment
+           1) Sublimetxt
+           2) VSCODE
+           3) NOTEPAD - Editor
+           4) Any one browser like - Chrome,Opera,Edge,                
+                                     IE,Firefox,safari, etc
+     sub req MERN Installations:
+          1) NodeJS on command prompt
+          2) Expressjs on command prompt
+          3) MongoDB on command prompt
+          4) React components on command prompt
+
+            Create the project
+IDE                                 Editor
+writing, saving, run the code      only write and save the code
+
+
+For JAVA IDE -- Eclipse , InteliJ, VSCODE
+
+
+About Browser :
+             Developer tools option enable - Fun+f12 key
+
+cookies
+caches
+stack
+heap
+
+website
+webapplication
+webpage
+
+
+static website
+dynamic website
+
+CSS: Cascading style sheet
+3 types
+inline css
+internal css
+external css
+
+
