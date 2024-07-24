@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<button onclick="balaji()">Click Me</button>
+	<p id="mango">Do u have girl friend or not?</p>
+</body>
+<script >
+	function balaji()
+	{
+		var a;// declaration
+		if(confirm('Tell me ur answer?'))
+		{
+			a="Yes,Am waiting for girl friend";
+		}
+		else
+		{
+			a="No dear, Am always solo";
+		}
+		document.getElementById('mango').innerHTML=a;
+		
+	}
+</script>
+</html>
