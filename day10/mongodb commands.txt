@@ -1,0 +1,250 @@
+show dbs
+
+use balaji
+
+show collections
+
+{
+first_name:"balaji",
+last_name:"s",
+colleges:["sjit","sjce"],
+address:{
+street:"4th cross",
+city:"mango city"
+},
+contacts:[
+{name:"magizhini",relation:"daughter"}
+]
+}
+
+db.createUser(
+   {
+     user:"balaji",
+     pwd: "123456",  // or cleartext password
+     roles:[ "readWrite", { role:"clusterManager", db:"admin" } ] 
+   }
+)
+
+db.createUser(
+   {
+     user:"jeno",
+     pwd:passwordPrompt(),  // or cleartext password
+     roles:[ "readWrite", { role:"clusterManager", db:"admin" } ] 
+   }
+)
+
+db.createUser(
+   {
+     user:"mano",
+     pwd: "123456",  // or cleartext password
+     roles:[ "readWrite", { role:"clusterManager", db:"admin" } ] 
+   }
+)
+
+privileges: [
+  { resource: { db: "customer", collection: "custtable" }, actions: [ "find", "update", "insert" ] },
+  { resource: { db: "products", collection: "orders" },  actions: [ "find" ] }
+]
+
+--------------
+
+
+db.createUser({user:"balaji",pwd:"1234",roles:["readwrite","dbAdmin"]});
+
+//new
+db.createUser({user:"balaji",pwd:"1234",roles:[{ role: "clusterAdmin", db: "admin" },
+                { role: "readAnyDatabase", db: "admin" },
+                "readWrite"]});
+
+db.createCollection('customers');
+
+show collections
+
+db.customers.insert({first_name:"balaji",last_name:"srinivasan",age:33});
+
+db.customers.find();
+
+db.customers.insert([{first_name:"mohan",last_name:"joseph",age:18},{first_name:"jeno",last_name:"williams",age:25},{first_name:"khan",last_name:"mohammad",age:15}]);
+
+db.customers.find().pretty();
+
+
+
+db.customers.update({first_name:"jeno"},{first_name:"jeno",last_name:"willaims",age:20});
+
+db.student.updateOne({name:"modi"},{$set:{age:79}})
+
+db.customers.find().pretty();
+
+db.customers.update({first_name:"jeno"},{$set:{gender:"female"}});
+
+db.customers.update({first_name:"khan"},{$set:{address:"salem"},$set:{mobile:9842098420},$set:{email:"khan@gmail.com"}});
+
+db.customers.find().pretty();
+
+db.customers.update({first_name:"jeno"},{$inc:{age:5}});
+
+db.customers.find().pretty();
+
+db.customers.update({first_name:"jeno"},{$unset:{age:1}});
+
+ db.customers.update({},{$unset:{email:1}},{multi:true});
+
+db.customers.find().pretty();
+
+
+// inert with update -- but not
+db.customers.update({first_name:"karthi"},{first_name:"karthi",last_name:"kishore",age:50});
+
+db.customers.find().pretty();
+
+
+
+db.customers.update({first_name:"karthi"},{first_name:"karthi",last_name:"kishore",age:50},{upsert:true});
+
+db.customers.find().pretty();
+
+
+db.customers.update({first_name:"karthi"},{$rename:{"age":"sno"}});
+
+db.customers.find().pretty();
+
+
+db.customers.remove({first_name:"karthi"});
+
+db.customers.find().pretty();
+
+db.customers.find({first_name:"balaji"});
+
+
+db.customers.find({$or:[{first_name:"balaji"},{first_name:"mohan"}]});
+
+db.customers.updateMany({$or:[{_id:2},{_id:3}]});
+
+
+db.customers.find({age:{$lt:30}});
+
+
+db.customers.find({"address.city":"salem"});
+
+
+db.customers.find().sort({last_name:1});
+
+db.customers.find().sort({last_name:-1});
+
+db.customers.find().sort({last_name:1}).pretty();
+
+db.customers.find().count();
+
+db.customers.find({age:30}).count();
+
+db.customers.find().limit(3);
+
+db.customers.find().limit(3).sort({last_name:1});
+
+db.customers.find().forEach(function(doc){print("Customer Name:"+doc.first_name)});
+
+--------------
+db.customers.insert({first_name:"pp",last_name:"pps",age:11,dob:"2005-06-06"});
+
+db.customers.find().sort({dob: -1}).pretty()
+
+db.customers.insert({first_name:"Abirami",
+last_name:"Abi",age:55,
+dob:"2000-01-01"});
+
+
+db.student.updateMany({},{$set:{dob:"2000-01-01"}})
+db.student.find();
+
+db.student.aggregate( [
+  { $match: { $or: [ { score: { $gt: 70, $lt: 90 } }, { views: { $gte: 1000 } } ] } },
+  { $group: { _id: null, count: { $sum: 1 } } }
+] );
+
+db.student.aggregate([ 
+    { "$group": { 
+        "_id": {},
+        "max": { "$max": "$age" }, 
+        "min": { "$min": "$age" } 
+    }}
+])
+
+db.student.aggregate( [
+  { $match: { $or: [ { age: { $gt: 25, $lt: 60 } } ] } },
+  { $group: { _id: "", count: { $sum: 1 } } }
+] );
+
+db.customers.insert({first_name: "gg",last_name:"ggs", time: new Date()})
+db.posts.insert({title: "How to Insert Date in MongoDB", time: new ISODate()})
+
+db.customers.find({
+    dob: {
+        $gte: '2005-01-01 00:00:00',
+        $lt:  '2015-12-12 00:00:00'
+    }
+}).pretty()
+
+
+---------------------------------------------------------------------------------------
+
+use admin
+db.createUser({
+  user: 'myReadOnlyUser',
+  pwd: passwordPrompt(),
+  roles: [
+    { role: 'read', db: 'admin' }
+  ]
+})
+
+use admin
+db.grantRolesToUser('myReadOnlyUser', [
+  { role: 'readWrite', db: 'admin' }
+])
+
+db.createRole({
+  role: 'readAndBackup',
+  privileges: [
+    { resource: { db: 'admin', collection: '' }, actions: [ 'find' ] }
+  ],
+  roles: []
+})
+
+db.grantRolesToUser('myReadOnlyUser', ['readAndBackup'])
+
+
+---------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+db.customer.find({
+    $or: [
+        {_id: 2},
+        {_id: 3}
+    ]
+});
+
+
+db.customer.updateMany({
+        { $or: [{_id: 2}, {$set: {salary: 10000}}] },
+        { $or: [{_id: 3}, {$set: {salary: 15000}}] }
+});
+
+db.customer.updateMany({_id: 2},{$set:{salary:10000}});
+
+
+
+
+
